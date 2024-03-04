@@ -1,11 +1,3 @@
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.csproj.AssemblyReference.cache
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfoInputs.cache
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfo.cs
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.csproj.CoreCompileInputs.cache
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.sourcelink.json
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\appsettings.json
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\web.exe
@@ -24,6 +16,14 @@ C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.csproj.AssemblyReference.cache
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfoInputs.cache
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfo.cs
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.csproj.CoreCompileInputs.cache
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.sourcelink.json
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\staticwebassets\msbuild.web.Microsoft.AspNetCore.StaticWebAssets.props
