@@ -45,13 +45,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
+            "Microsoft.AspNetCore.Cors": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[2.2.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "microsoft.aspnet.signalr": {
+              "target": "Package",
+              "version": "[2.4.3, )"
             }
           },
           "imports": [

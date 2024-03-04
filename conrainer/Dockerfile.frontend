@@ -1,0 +1,10 @@
+FROM node #js
+
+RUN apt-get -y install git \
+    && git clone https://github.com/deg/dinegreier
+
+WORKDIR /WEB_APP_THINGY/frontend/
+
+RUN npm i
+
+CMD["npm start"]
