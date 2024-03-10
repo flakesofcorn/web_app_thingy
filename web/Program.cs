@@ -14,6 +14,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 // Add services to the container.
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
@@ -37,5 +38,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<Chathub>(pattern:"/chat");
+
+app.UseCors("reactapp");
 
 app.Run();

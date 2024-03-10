@@ -16,6 +16,7 @@ C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.csproj.AssemblyReference.cache
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfoInputs.cache
