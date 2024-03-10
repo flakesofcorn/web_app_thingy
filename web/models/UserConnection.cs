@@ -1,4 +1,4 @@
-namespace models;
+namespace web.models;
 
 public class UserConnection 
 {

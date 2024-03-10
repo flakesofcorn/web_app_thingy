@@ -1,6 +1,10 @@
-using hubs;
+using web.hubs;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.SignalR;
+using web.models;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => 
@@ -14,6 +18,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSingleton<SharedDB> {};
 
 // Add services to the container.
 builder.Services.AddSignalR();

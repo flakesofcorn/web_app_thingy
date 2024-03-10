@@ -39,3 +39,44 @@ C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.pdb
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\web.genruntimeconfig.cache
 C:\Users\sofian\OneDrive - Osloskolen\IT\Årsoppgave\main\web_app_thingy\web\obj\Debug\net8.0\ref\web.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\appsettings.Development.json
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\appsettings.json
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\web.exe
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\web.deps.json
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\web.runtimeconfig.json
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\web.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\web.pdb
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Microsoft.AspNet.SignalR.Core.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Microsoft.Owin.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Microsoft.Owin.Host.SystemWeb.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Microsoft.Owin.Security.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Owin.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\web_app\web_app_thingy\web\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.csproj.AssemblyReference.cache
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.GeneratedMSBuildEditorConfig.editorconfig
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfoInputs.cache
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.AssemblyInfo.cs
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.csproj.CoreCompileInputs.cache
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.MvcApplicationPartsAssemblyInfo.cs
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.MvcApplicationPartsAssemblyInfo.cache
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.sourcelink.json
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets.build.json
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets.development.json
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets\msbuild.web.Microsoft.AspNetCore.StaticWebAssets.props
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets\msbuild.build.web.props
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.web.props
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.web.props
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\staticwebassets.pack.json
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\scopedcss\bundle\web.styles.css
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.csproj.Up2Date
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.dll
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\refint\web.dll
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.pdb
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\web.genruntimeconfig.cache
+D:\web_app\web_app_thingy\web\obj\Debug\net8.0\ref\web.dll
