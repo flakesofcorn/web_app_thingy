@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddSingleton<SharedDB> {};
+builder.Services.AddSingleton<SharedDB>();
 
 // Add services to the container.
 builder.Services.AddSignalR();

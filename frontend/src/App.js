@@ -7,35 +7,35 @@ import { useState } from 'react';
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 function App() {
+  const [conn, setConnection] = useState();
+  const [messages, setMessages] = useState([]);
 
-  const[conn, setConnection] = useState();
-  const[messages, setmessages] = useState();
-
-  const joinchatroom = async (username, chatroom) => {
+  const joinChatroom = async (username, chatroom) => {
     try {
       const conn = new HubConnectionBuilder()
-                  .withUrl("http://localhost:5173/chat")
-                  .configureLogging(LogLevel.Information)
-                  .build();
+        .withUrl("http://localhost:5173/chat")
+        .configureLogging(LogLevel.Information)
+        .build();
+
       conn.on("JoinSpecificChat", (username, msg) => {
         console.log(msg);
+        messages.push(JSON.stringify(username, msg));
       });
 
-      conn.on("RecivieSpecificMessage", (username, msg) => {
-        setmessages(messages => [...messages, {username, msg}]);
+      conn.on("receiveSpecificMessage", (username, msg) => {
+        setMessages(prevMessages => [...prevMessages, { username, msg }]);
+        console.log(messages);
       });
 
       await conn.start();
-      await conn.invoke("JoinSpecificChat", {username, chatroom});
- 
+      await conn.invoke("JoinSpecificChat", { username, chatroom }); 
       setConnection(conn);
-
     } catch(e) {
-      console.log(e.chatroom);
+      console.error(e);
     }
   }
+
   return (
-    
     <div>
       <main className="main">
         <Container>
@@ -44,14 +44,12 @@ function App() {
               <h1>Welcome</h1>
             </Col>
           </Row>
-          { !conn
-            ? <Waitingroom joinchatroom={joinchatroom}></Waitingroom>
+          { ! conn
+            ? <Waitingroom joinchatroom={joinChatroom}></Waitingroom>
             : <Chatroom messages={messages}></Chatroom>
           }
         </Container>
-
       </main>
-
     </div>
   );
 }
