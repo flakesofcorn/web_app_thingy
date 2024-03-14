@@ -18,8 +18,10 @@ function App() {
         .build();
 
       conn.on("JoinSpecificChat", (username, msg) => {
-        console.log(msg);
-        messages.push(JSON.stringify(username, msg));
+        console.log("asd", msg);
+
+        setMessages(prevMessages => [...prevMessages, {username, msg}]);
+        console.log(messages);
       });
 
       conn.on("receiveSpecificMessage", (username, msg) => {
@@ -35,6 +37,14 @@ function App() {
     }
   }
 
+  const sendMessage = async(messages) => {
+    try {
+      await conn.invoke("sendmessage", messages);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <div>
       <main className="main">
@@ -46,7 +56,7 @@ function App() {
           </Row>
           { ! conn
             ? <Waitingroom joinchatroom={joinChatroom}></Waitingroom>
-            : <Chatroom messages={messages}></Chatroom>
+            : <Chatroom messages={messages} sendMessage={sendMessage}></Chatroom>
           }
         </Container>
       </main>
