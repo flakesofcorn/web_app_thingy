@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.SignalR;
 using web.models;
-
+/* 
+a bunch of complicated stuff here.
+builds the backend app and createa cors to localhost:3000(frontend)
+*/
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +44,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+// routes hub requests to "/chat" to the chathub 
 
 app.MapHub<Chathub>(pattern:"/chat");
 
