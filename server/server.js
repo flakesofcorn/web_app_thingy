@@ -14,7 +14,7 @@ app.use(express.static('build'));
 app.use(cors());
 
 // Proxy HTTP requests to C# backend
-app.use('/api', createProxyMiddleware({ target: 'http://csharp-backend:port', changeOrigin: true }));
+app.use('/api', createProxyMiddleware({ target: 'http://web', changeOrigin: true }));
 
 // Create a WebSocket server
 const server = http.createServer(app);

@@ -21,7 +21,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<YourDbContext>(options =>
-            options.UseMySqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));
 
         services.AddIdentity<User, IdentityRole>(options =>
         {
