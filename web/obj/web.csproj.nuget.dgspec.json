@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\web_app\\web_app_thingy\\web\\web.csproj": {}
+    "C:\\daf\\web_app_thingy\\web\\web.csproj": {}
   },
   "projects": {
-    "D:\\web_app\\web_app_thingy\\web\\web.csproj": {
+    "C:\\daf\\web_app_thingy\\web\\web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\web_app\\web_app_thingy\\web\\web.csproj",
+        "projectUniqueName": "C:\\daf\\web_app_thingy\\web\\web.csproj",
         "projectName": "web",
-        "projectPath": "D:\\web_app\\web_app_thingy\\web\\web.csproj",
+        "projectPath": "C:\\daf\\web_app_thingy\\web\\web.csproj",
         "packagesPath": "C:\\Users\\Sofian\\.nuget\\packages\\",
-        "outputPath": "D:\\web_app\\web_app_thingy\\web\\obj\\",
+        "outputPath": "C:\\daf\\web_app_thingy\\web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -57,17 +57,17 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
-            "Microsoft.AspNetCore.IdentiCore": {
+            "Microsoft.AspNetCore.Identity": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.4, )"
             },
             "Microsoft.AspNetCore.SignalR": {
               "target": "Package",
               "version": "[1.1.0, )"
-            },
-            "Microsoft.AspNety.EntityFrameworktCore.Identity": {
-              "target": "Package",
-              "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -82,6 +82,10 @@
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -111,7 +115,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

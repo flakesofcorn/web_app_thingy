@@ -1,41 +1,29 @@
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const cors = require('cors');
-const http = require('http');
-const WebSocket = require('ws');
+const bodyParser = require('body-parser');
+const axios = require('axios');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = 5000;
 
-// Serve React static files
-app.use(express.static('build'));
+app.use(bodyParser.json());
 
-// CORS middleware
-app.use(cors());
+// Route to handle login
+app.post('/login', async (req, res) => {
+  try {
+    // Assuming you have some logic here to validate the user credentials
+    const { username, password } = req.body;
 
-// Proxy HTTP requests to C# backend
-app.use('/api', createProxyMiddleware({ target: 'http://web', changeOrigin: true }));
-
-// Create a WebSocket server
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
-// Proxy WebSocket connections to C# backend
-wss.on('connection', function connection(ws) {
-  const signalRProxy = new WebSocket('');
-  
-  signalRProxy.on('open', function open() {
-    ws.on('message', function incoming(message) {
-      signalRProxy.send(message);
-    });
-
-    signalRProxy.on('message', function incoming(data) {
-      ws.send(data);
-    });
-  });
+    // Send the data to C# controller
+    const cSharpResponse = await axios.post('http://localhost:5173/web/auth/login', { username, password });
+    
+    // Forward the response from C# controller to the client
+    res.json(cSharpResponse.data);
+  } catch (error) {
+    console.error('Error sending login request to C# controller:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
-// Start the server
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -5,8 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Pomelo.EntityFrameworkCore.MySql;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using web.models;
+using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 public class Startup
 {
@@ -20,8 +25,16 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<YourDbContext>(options =>
-            options.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));
+
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        services.AddSingleton(configuration);
+
+        services.AddDbContext<DBcontext_user>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("ConnectionStrings:MySqlConnection")));
 
         services.AddIdentity<User, IdentityRole>(options =>
         {
@@ -38,16 +51,16 @@ public class Startup
             options.Lockout.AllowedForNewUsers = true;
 
             // User settings
-            options.User.RequireUniqueEmail = true;
+            // options.User.RequireUniqueEmail = true;
         })
-        .AddEntityFrameworkStores<YourDbContext>()
+        .AddEntityFrameworkStores<DBcontext_user>()
         .AddDefaultTokenProviders();
 
-        var jwtSettings = Configuration.GetSection("JwtSettings");
-        services.Configure<JwtSettings>(jwtSettings);
+        /*         var jwtSettings = Configuration.GetSection("JwtSettings");
+                services.Configure<JwtSettings>(jwtSettings);
 
-        var jwtSettingsInstance = jwtSettings.Get<JwtSettings>();
-        var key = Encoding.ASCII.GetBytes(jwtSettingsInstance.Secret);
+                var jwtSettingsInstance = jwtSettings.Get<JwtSettings>();
+                var key = Encoding.ASCII.GetBytes(jwtSettingsInstance.Secret); */
 
         services.AddAuthentication(options =>
         {
@@ -60,10 +73,13 @@ public class Startup
             options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters
             {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false
+                ValidIssuer = Configuration["Jwt:Issuer"],
+                ValidAudience = Configuration["Jwt:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
             };
         });
 

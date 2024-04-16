@@ -10,18 +10,11 @@ using System;
 
 [Route("api/auth")]
 [ApiController]
-public class AuthController : ControllerBase
+public class AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration) : ControllerBase
 {
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
-    private readonly IConfiguration _configuration; // For accessing configuration settings
-
-    public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _configuration = configuration;
-    }
+    private readonly UserManager<User> _userManager = userManager;
+    private readonly SignInManager<User> _signInManager = signInManager;
+    private readonly IConfiguration _configuration = configuration; // For accessing configuration settings
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto model)
@@ -65,5 +58,12 @@ public class AuthController : ControllerBase
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    [HttpPost("Register")]
+
+    public void Register(LoginDto model)
+    {
+
     }
 }

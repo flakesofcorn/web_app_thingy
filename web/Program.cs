@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.SignalR;
 using web.models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 /* 
 a bunch of complicated stuff here.
 builds the backend app and createa cors to localhost:3000(frontend)
@@ -22,6 +24,9 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddSingleton<SharedDB>();
+
+
+
 
 // Add services to the container.
 builder.Services.AddSignalR();
