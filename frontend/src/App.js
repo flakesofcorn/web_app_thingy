@@ -1,35 +1,51 @@
 import './App.css';
 import { Col, Row, Container } from 'react-bootstrap';
+import Chatroom from './components/chatroom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Waitingroom from './components/waitingroom';
 import { useState } from 'react';
-import {HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
+import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 function App() {
+  const [conn, setConnection] = useState();
+  const [messages, setMessages] = useState([]);
 
-  const[conn, setConnection] = useState();
-
-  const joinchatroom = async (username, chatroom) => {
+  const joinChatroom = async (username, chatroom) => {
     try {
-      const conn = HubConnectionBuilder()
-                  .withurl("http://localhost:5173/chat")
-                  .configurelogging(LogLevel.Information)
-                  .build();
+      const conn = new HubConnectionBuilder()
+        .withUrl("http://localhost:5173/chat")
+        .configureLogging(LogLevel.Information)
+        .build();
+
       conn.on("JoinSpecificChat", (username, msg) => {
-        console.log(msg);
+        console.log("asd", msg);
+
+        setMessages(prevMessages => [...prevMessages, {username, msg}]);
+        console.log(messages);
+      });
+
+      conn.on("receiveSpecificMessage", (username, msg) => {
+        setMessages(prevMessages => [...prevMessages, { username, msg }]);
+        console.log(messages);
       });
 
       await conn.start();
-      await conn.invoke("JoinSpecificChat", {username, chatroom});
- 
+      await conn.invoke("JoinSpecificChat", { username, chatroom }); 
       setConnection(conn);
-
     } catch(e) {
+      console.error(e);
+    }
+  }
+
+  const sendMessage = async(messages) => {
+    try {
+      await conn.invoke("sendmessage", messages);
+    } catch (e) {
       console.log(e);
     }
   }
+
   return (
-    
     <div>
       <main className="main">
         <Container>
@@ -38,11 +54,12 @@ function App() {
               <h1>Welcome</h1>
             </Col>
           </Row>
-          <Waitingroom joinchatroom={joinchatroom}></Waitingroom>
+          { ! conn
+            ? <Waitingroom joinchatroom={joinChatroom}></Waitingroom>
+            : <Chatroom messages={messages} sendMessage={sendMessage}></Chatroom>
+          }
         </Container>
-
       </main>
-
     </div>
   );
 }
