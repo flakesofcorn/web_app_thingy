@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using web.models;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
+using web.service;
 
 public class Startup
 {
@@ -33,7 +34,7 @@ public class Startup
 
         services.AddSingleton(configuration);
 
-        services.AddDbContext<DBcontext_user>(options =>
+        services.AddDbContext<ApplicationUser>(options =>
             options.UseMySQL(Configuration.GetConnectionString("ConnectionStrings:MySqlConnection")));
 
         services.AddIdentity<User, IdentityRole>(options =>
@@ -53,14 +54,20 @@ public class Startup
             // User settings
             // options.User.RequireUniqueEmail = true;
         })
-        .AddEntityFrameworkStores<DBcontext_user>()
+        .AddEntityFrameworkStores<ApplicationUser>()
         .AddDefaultTokenProviders();
 
-        /*         var jwtSettings = Configuration.GetSection("JwtSettings");
-                services.Configure<JwtSettings>(jwtSettings);
+        // Retrieve JwtSettings from configuration
+        var jwtSettings = Configuration.GetSection("JwtSettings");
+        services.Configure<JwtSettings>(jwtSettings);
 
-                var jwtSettingsInstance = jwtSettings.Get<JwtSettings>();
-                var key = Encoding.ASCII.GetBytes(jwtSettingsInstance.Secret); */
+        // Retrieve JwtSettings instance
+        var jwtSettingsInstance = jwtSettings.Get<JwtSettings>();
+        var key = Encoding.ASCII.GetBytes(jwtSettingsInstance.Secret);
+
+        // Register JwtService as a singleton
+        services.AddSingleton<JwtService>(new JwtService(Convert.ToString(key)));
+
 
         services.AddAuthentication(options =>
         {
@@ -77,9 +84,9 @@ public class Startup
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = Configuration["Jwt:Issuer"],
-                ValidAudience = Configuration["Jwt:Issuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                ValidIssuer = Configuration["JwtSettings:Issuer"],
+                ValidAudience = Configuration["JwtSettings:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:Key"]))
             };
         });
 
@@ -111,7 +118,7 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Auth}/{action=login}/{id?}");
         });
     }
 }

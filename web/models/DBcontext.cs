@@ -1,16 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace web.models;
-
-public class DBcontext_user : DbContext
+namespace web.models
 {
-    public DBcontext_user(DbContextOptions<DBcontext_user> options) : base(options)
+    public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<ApplicationUser> Users { get; set; }
     }
+
+    public class ApplicationUser
+    {
         public int UserId { get; set; }
         public string Username { get; set; }
-        public byte[] PasswordHash { get; set; } // Assuming password will be stored as a byte array
-        public byte[] Salt { get; set; } // Salt for password hashing
+        public string Email { get; set; }
+        public string PasswordHashWithSalt { get; set; } // Combined hash and salt
         public bool IsAdmin { get; set; }
-
+    }
 }

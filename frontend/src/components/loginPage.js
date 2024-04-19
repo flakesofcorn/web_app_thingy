@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Row, Col } from 'react-bootstrap';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -8,8 +10,9 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/login', { username, password });
-      console.log(response.data); // Assuming the response contains authentication token or status
+      const response = await axios.post('http://localhost:5000/login', { username, password });
+      console.log("qwe", response.data);
+      localStorage.setItem("token", response.data);
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -30,6 +33,12 @@ const LoginForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button type="submit">Login</button>
+      <Row>
+        <Col>
+          {/* Use the Link component to navigate to the registration form */}
+          <Link to="/register">Register</Link>
+        </Col>
+      </Row>
     </form>
   );
 };

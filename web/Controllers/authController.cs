@@ -7,14 +7,17 @@ using System.IdentityModel.Tokens.Jwt; // For JWT token generation
 using System.Text; // For JWT token generation
 using System.Security.Claims; // For JWT token generation
 using System;
+using web.service;
 
-[Route("api/auth")]
+[Route("web/auth")]
 [ApiController]
-public class AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration) : ControllerBase
+public class AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, JwtService jwtService) : ControllerBase
 {
     private readonly UserManager<User> _userManager = userManager;
     private readonly SignInManager<User> _signInManager = signInManager;
     private readonly IConfiguration _configuration = configuration; // For accessing configuration settings
+    private readonly JwtService _jwtService;
+
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto model)
@@ -30,7 +33,8 @@ public class AuthController(UserManager<User> userManager, SignInManager<User> s
             var token = GenerateJwtToken(user);
 
             return Ok(new { token });
-        }
+        } else 
+        
 
         return Unauthorized("Invalid username or password");
     }
@@ -62,8 +66,56 @@ public class AuthController(UserManager<User> userManager, SignInManager<User> s
 
     [HttpPost("Register")]
 
-    public void Register(LoginDto model)
+    public async Task<IActionResult> Register(RegisterViewModel model)
     {
+        
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        // Check if the username is already taken
+        var existingUser = await _userManager.FindByNameAsync(model.UserName);
+        if (existingUser != null)
+        {
+            return BadRequest("Username is already taken");
+        }
+
+        // Create a new User object
+        var newUser = new User
+        {
+            Username = model.UserName,
+            Email = model.Email,
+            // Other properties as needed
+        };
+
+        // Create the user in the database
+        var result = await _userManager.CreateAsync(newUser, model.Password);
+        if (!result.Succeeded)
+        {
+            // Registration failed
+            return BadRequest("Failed to register user");
+        }
+
+        // Registration successful
+        return Ok("User registered successfully");
+    }
+
+
+    
+
+    [HttpPost("verify")]
+    public IActionResult VerifyToken([FromBody] string token)
+    {
+        if (_jwtService.VerifyToken(token))
+        {
+            return Ok("Token is valid");
+        }
+        else
+        {
+            return BadRequest("Token is invalid");
+        }
+
 
     }
 }

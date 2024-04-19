@@ -12,15 +12,22 @@ builds the backend app and createa cors to localhost:3000(frontend)
 
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("reactapp", builder => 
+    options.AddPolicy("reactapp", builder =>
     {
         builder.WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
+/*     options.AddPolicy("express", builder =>
+    {
+    builder.WithOrigins("http://localhost:5000")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    }); */
 });
 
 builder.Services.AddSingleton<SharedDB>();
@@ -51,8 +58,10 @@ app.UseAuthorization();
 app.MapControllers();
 // routes hub requests to "/chat" to the chathub 
 
-app.MapHub<Chathub>(pattern:"/chat");
+app.MapHub<Chathub>(pattern: "/chat");
 
 app.UseCors("reactapp");
+
+// app.UseCors("express");
 
 app.Run();
