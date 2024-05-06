@@ -48,7 +48,10 @@ const RegisterForm = ({ login }) => {
         onChange={handleChange}
       />
       <button type="submit">Register</button>
-      <link to="./loginPage"/>
+      <Link to="/login.js"><button>
+        Login
+      </button>
+      </Link>
     </form>
   );
 };

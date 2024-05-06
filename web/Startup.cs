@@ -34,7 +34,7 @@ public class Startup
 
         services.AddSingleton(configuration);
 
-        services.AddDbContext<ApplicationUser>(options =>
+        services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySQL(Configuration.GetConnectionString("ConnectionStrings:MySqlConnection")));
 
         services.AddIdentity<User, IdentityRole>(options =>
@@ -54,7 +54,7 @@ public class Startup
             // User settings
             // options.User.RequireUniqueEmail = true;
         })
-        .AddEntityFrameworkStores<ApplicationUser>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
         // Retrieve JwtSettings from configuration
