@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\daf\\web_app_thingy\\web\\web.csproj": {}
+    "C:\\Users\\sofian\\OneDrive - Osloskolen\\IT\\Årsoppgave\\main\\web_app_thingy\\web\\web.csproj": {}
   },
   "projects": {
-    "C:\\daf\\web_app_thingy\\web\\web.csproj": {
+    "C:\\Users\\sofian\\OneDrive - Osloskolen\\IT\\Årsoppgave\\main\\web_app_thingy\\web\\web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\daf\\web_app_thingy\\web\\web.csproj",
+        "projectUniqueName": "C:\\Users\\sofian\\OneDrive - Osloskolen\\IT\\Årsoppgave\\main\\web_app_thingy\\web\\web.csproj",
         "projectName": "web",
-        "projectPath": "C:\\daf\\web_app_thingy\\web\\web.csproj",
-        "packagesPath": "C:\\Users\\Sofian\\.nuget\\packages\\",
-        "outputPath": "C:\\daf\\web_app_thingy\\web\\obj\\",
+        "projectPath": "C:\\Users\\sofian\\OneDrive - Osloskolen\\IT\\Årsoppgave\\main\\web_app_thingy\\web\\web.csproj",
+        "packagesPath": "C:\\Users\\sofian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sofian\\OneDrive - Osloskolen\\IT\\Årsoppgave\\main\\web_app_thingy\\web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Sofian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sofian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,11 +39,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -71,7 +67,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -115,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
