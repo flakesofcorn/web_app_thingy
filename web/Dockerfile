@@ -1,30 +1,20 @@
-# Use official .NET Core SDK image as base
-FROM mcr.microsoft.com/dotnet/sdk:latest AS builder
+# Use the .NET Core SDK image as the base image
+FROM mcr.microsoft.com/dotnet/sdk:latest AS build
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy the rest of the application
+# Copy the project files to the working directory
 COPY . .
 
+# Restore dependencies
+RUN dotnet Restore
+
 # Build the application
-RUN dotnet build -c Release -o /app
+RUN dotnet build -c Release -o /app/build
 
-# Use lightweight .NET Core runtime image for production
-FROM mcr.microsoft.com/dotnet/aspnet:latest
-
-# Set working directory
-WORKDIR /app
-
-# Copy build files from previous stage
-COPY --from=builder /app .
-
-# Expose the port
+# Expose port to the outside world
 EXPOSE 5173
 
-# Command to run the application
-ENTRYPOINT ["dotnet", "run"]
+# Run the application
+CMD ["dotnet", "run"]

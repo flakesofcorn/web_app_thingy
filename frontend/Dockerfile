@@ -1,8 +1,8 @@
-# Use official Node.js image as base
-FROM node:latest AS builder
+# Use the official Node.js image as base
+FROM node:14 as build
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -16,17 +16,17 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-# Use lightweight Node.js image for production
-FROM node:alpine
+# Use lightweight Nginx image to serve the React app
+FROM nginx:alpine
 
-# Set working directory
-WORKDIR /app
+# Copy build files from the previous stage
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-# Copy build files from previous stage
-COPY --from=builder /app/build ./build
-
-# Expose the port
+# Expose port 3000
 EXPOSE 3000
 
-# Command to run the application
-CMD ["node", "build/index.js"]
+# Update default Nginx configuration to use port 3000
+RUN sed -i 's/80/3000/' /etc/nginx/conf.d/default.conf
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]

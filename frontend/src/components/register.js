@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 
 const RegisterForm = ({ login }) => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
+    UserName: '',
+    Email: '',
+    Password: '',
+    admin: false
   });
 
   const handleChange = (e) => {
@@ -30,28 +31,28 @@ const RegisterForm = ({ login }) => {
         type="text"
         name="username"
         placeholder="Username"
-        value={formData.username}
+        value={formData.UserName}
         onChange={handleChange}
       />
       <input
-        type="email"
-        name="email"
+        type="Email"
+        name="Email"
         placeholder="Email"
-        value={formData.email}
+        value={formData.Email}
         onChange={handleChange}
       />
       <input
-        type="password"
-        name="password"
+        type="Password"
+        name="Password"
         placeholder="Password"
-        value={formData.password}
+        value={formData.Password}
         onChange={handleChange}
       />
       <button type="submit">Register</button>
-      <Link to="/login.js"><button>
+      {/* <Link to=""><button>
         Login
       </button>
-      </Link>
+      </Link> */}
     </form>
   );
 };

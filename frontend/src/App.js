@@ -14,28 +14,8 @@ import LoginForm from './components/loginPage';
 function App() {
   const[logged, setlogged] = useState();
   useEffect(() => {
-    const validateToken = async () => {
-      try {
-        // checking for token stored in localStorage or somewhere else
-        const token = localStorage.getItem('token');
-        if (!token) {
-          setlogged(false);
-          console.log("false");
-          return;
-        }
-        
-        // Make a request to your Express server to route the validation request
-        const response = await axios.post('/api/validate-token', { token });
-        
-        // Handle the response
-        console.log('Token validation response:', response.data);
-      } catch (error) {
-        console.error('Error validating token:', error);
-      }
-    };
-
-    // Call the function to validate token on startup
-    validateToken();
+    
+ 
   }, []); // Empty dependency array to only run this effect once on component mount
 
 

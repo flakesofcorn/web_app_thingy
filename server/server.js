@@ -1,69 +1,100 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const mysql = require('mysql');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 5000;
+const secretKey = 'your-secret-key';
 
 app.use(bodyParser.json());
+app.use(cors());
 
-const corsOptions = {
-  origin: '*',  
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE' 
+// MySQL database connection
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'your_mysql_username',
+  password: 'your_mysql_password',
+  database: 'your_database_name'
+});
+
+// Connect to MySQL
+db.connect(err => {
+  if (err) {
+    console.error('Error connecting to MySQL database:', err);
+    return;
+  }
+  console.log('Connected to MySQL database');
+});
+
+// Middleware for JWT verification
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
 }
-app.use(cors(corsOptions))
 
-// Route to handle login
-app.post('/login', async (req, res) => {
-  console.log("hello \n \n \n \n \n \n");
-  try {
-    // Assuming you have some logic here to validate the user credentials
-    const { username, password } = req.body;
-
-    // Send the data to C# controller
-    const cSharpResponse = await axios.post('http://localhost:5173/web/auth/login', { username, password });
-    console.log("hello");
-    
-    // Forward the response from C# controller to the client
-    res.json(cSharpResponse.data);
-  } catch (error) {
-    console.error('Error sending login request to C# controller:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-//route to handle registration
+// Route to handle user registration
 app.post('/register', async (req, res) => {
-  try {
-    // Assuming you have some logic here to validate the user credentials
-    const { username, email, password } = req.body.formData;
+  const { username, email, password, admin } = req.body;
+  
+  // Hash and salt the password
+  const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
 
-    // Send the data to C# controller
-    const cSharpResponse = await axios.post('http://localhost:5173/web/auth/Register', { username, password, email });
-    
-    // Forward the response from C# controller to the client
-    res.json(cSharpResponse.data);
-  } catch (error) {
-    console.error('Error sending registration request to C# controller:', error);
-    res.status(500).json({ error: 'Internal server error'});
-  }
+  // Insert user into the database
+  const sql = 'INSERT INTO users (username, email, password_hash, admin) VALUES (?, ?, ?, ?)';
+  db.query(sql, [username, email, hashedPassword, admin], (err, result) => {
+    if (err) {
+      console.error('Error registering user:', err);
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
+    console.log('User registered successfully');
+    res.json({ message: 'User registered successfully' });
+  });
 });
 
-app.post('/validate-token', async (req, res) => {
-  try {
-    // Assuming you have some logic here to validate the user credentials
-    const { token } = req.body;
+// Route to handle user login
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
 
-    // Send the data to C# controller
-    const cSharpResponse = await axios.post('http://localhost:5173/web/auth/verify', { token });
-    
-    // Forward the response from C# controller to the client
-    res.json(cSharpResponse.data);
-  } catch (error) {
-    console.error('Error sending registration request to C# controller:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+  // Retrieve user from the database by username
+  const sql = 'SELECT * FROM users WHERE username = ?';
+  db.query(sql, [username], async (err, results) => {
+    if (err) {
+      console.error('Error retrieving user from database:', err);
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // Compare the hashed password with the provided password
+    const user = results[0];
+    const match = await bcrypt.compare(password, user.password_hash);
+    if (!match) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // Passwords match, generate JWT
+    const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, secretKey);
+    res.json({ message: 'Login successful', token: token });
+  });
+});
+
+// Protected route example
+app.get('/protected-route', authenticateToken, (req, res) => {
+  res.json({ message: 'This is a protected route', user: req.user });
 });
 
 app.listen(PORT, () => {
