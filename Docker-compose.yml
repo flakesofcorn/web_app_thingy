@@ -9,7 +9,7 @@ services:
     volumes:
       - ./frontend:/app  # Bind mount for frontend code
 
-  middleware:
+  server:
     build:
       context: ./server
       dockerfile: Dockerfile

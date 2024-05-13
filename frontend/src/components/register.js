@@ -18,7 +18,7 @@ const RegisterForm = ({ login }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/register', { formData });
+      const response = await axios.post('http://localhost:5000/register',  formData );
       console.log(response.data); // Assuming the response contains authentication token or status
     } catch (error) {
       console.error('registration failed:', error);
@@ -29,13 +29,13 @@ const RegisterForm = ({ login }) => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        name="username"
+        name="UserName"
         placeholder="Username"
         value={formData.UserName}
         onChange={handleChange}
       />
       <input
-        type="Email"
+        type="text"
         name="Email"
         placeholder="Email"
         value={formData.Email}

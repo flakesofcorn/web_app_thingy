@@ -4,20 +4,26 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
+const { METHODS } = require('http');
 
 const app = express();
 const PORT = 5000;
-const secretKey = 'your-secret-key';
+const secretKey = 'apple';
+
+var corsoptions = {
+  origin: "http://localhost:3000",
+  METHODS: "GET,POST",
+};
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsoptions));
 
 // MySQL database connection
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'your_mysql_username',
-  password: 'your_mysql_password',
-  database: 'your_database_name'
+  user: 'wadb_user',
+  password: 'asd321',
+  database: 'my_database'
 });
 
 // Connect to MySQL
@@ -45,6 +51,7 @@ function authenticateToken(req, res, next) {
 // Route to handle user registration
 app.post('/register', async (req, res) => {
   const { username, email, password, admin } = req.body;
+  console.log(username);
   
   // Hash and salt the password
   const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds

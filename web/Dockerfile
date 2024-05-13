@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Restore dependencies
+RUN dotnet clean
 RUN dotnet Restore
 
 # Build the application
