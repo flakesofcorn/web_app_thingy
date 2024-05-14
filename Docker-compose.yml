@@ -1,4 +1,3 @@
-version: '3'
 
 services:
   frontend:
@@ -7,17 +6,23 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app  # Bind mount for frontend code
 
-  middleware:
+  server:
     build:
-      context: ./middleware
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    volumes:
+      - ./server:/app  # Bind mount for middleware code
 
   backend:
     build:
-      context: ./backend
+      context: ./web
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
+    volumes:
+      - ./web:/app  # Bind mount for backend code

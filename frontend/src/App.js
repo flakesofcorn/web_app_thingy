@@ -8,36 +8,47 @@ import { useEffect, useState } from 'react';
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import axios from 'axios';
 import LoginForm from './components/loginPage';
-// import RegisterForm from './components/register';
-// import { useEffect } from 'react';
 
 function App() {
-  const[logged, setlogged] = useState();
-  useEffect(() => {
-    const validateToken = async () => {
-      try {
-        // checking for token stored in localStorage or somewhere else
-        const token = localStorage.getItem('token');
-        if (!token) {
-          setlogged(false);
-          console.log("false");
-          return;
-        }
-        
-        // Make a request to your Express server to route the validation request
-        const response = await axios.post('/api/validate-token', { token });
-        
-        // Handle the response
-        console.log('Token validation response:', response.data);
-      } catch (error) {
-        console.error('Error validating token:', error);
-      }
-    };
+  const [logged, setlogged] = useState();
+  const [reg, setreg] = useState();
+  async function checklogged() {
+    if (!localStorage.getItem("token")) {
+      setlogged(false);
+    } else {
+      const token = localStorage.getItem('token');
 
-    // Call the function to validate token on startup
-    validateToken();
+      axios.post('http://localhost:5000/validate-token', token, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          // If the response indicates a successful validation, set isLoggedIn to true
+          if (response.data.message === 'Token is valid') {
+            setlogged(true);
+          }
+        })
+        .catch(error => {
+          // Handle errors, such as failed validation or network issues
+          console.error('Error:', error);
+        })
+        .finally(() => {
+          // You can use the isLoggedIn variable here after the request is complete
+          console.log('Is logged in:', logged);
+        });
+
+    }
+  }
+  useEffect(() => {
+    checklogged();
   }, []); // Empty dependency array to only run this effect once on component mount
 
+  function redirect() {
+    if (reg) {
+      setreg(false)
+    } else { setreg(true) }
+  }
 
   const [conn, setConnection] = useState();
   const [messages, setMessages] = useState([]);
@@ -53,7 +64,7 @@ function App() {
       conn.on("JoinSpecificChat", (username, msg) => {
         console.log("asd", msg);
 
-        setMessages(prevMessages => [...prevMessages, {username, msg}]);
+        setMessages(prevMessages => [...prevMessages, { username, msg }]);
         console.log(messages);
       });
 
@@ -64,14 +75,14 @@ function App() {
 
 
       await conn.start();
-      await conn.invoke("JoinSpecificChat", { username, chatroom }); 
+      await conn.invoke("JoinSpecificChat", { username, chatroom });
       setConnection(conn);
-    } catch(e) {
+    } catch (e) {
       console.error(e);
     }
   }
 
-  const sendMessage = async(messages) => {
+  const sendMessage = async (messages) => {
     try {
       await conn.invoke("sendmessage", messages);
     } catch (e) {
@@ -89,13 +100,13 @@ function App() {
             </Col>
           </Row>
 
-          { ! logged
-            ? 
-             <RegisterForm></RegisterForm>
-            
-           : ! conn
-            ? <Waitingroom joinchatroom={joinChatroom}></Waitingroom>
-            : <Chatroom messages={messages} sendMessage={sendMessage}></Chatroom>
+          {!logged
+            ? !reg ? <RegisterForm redirect={redirect}></RegisterForm>
+              : <LoginForm redirect={redirect} changelogged={checklogged} ></LoginForm>
+
+            : !conn
+              ? <Waitingroom joinchatroom={joinChatroom}></Waitingroom>
+              : <Chatroom messages={messages} sendMessage={sendMessage}></Chatroom>
           }
         </Container>
       </main>
