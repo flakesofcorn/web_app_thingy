@@ -37,6 +37,7 @@ db.connect(err => {
 
 // Middleware for JWT verification
 function authenticateToken(req, res, next) {
+  console.log("hello");
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   if (token == null) return res.sendStatus(401);
@@ -50,15 +51,16 @@ function authenticateToken(req, res, next) {
 
 // Route to handle user registration
 app.post('/register', async (req, res) => {
-  const { username, email, password, admin } = req.body;
-  console.log(username);
+  
+  const User = req.body;
+  console.log(User);
   
   // Hash and salt the password
-  const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
+  const hashedPassword = await bcrypt.hash(User.Password, 10); // 10 is the salt rounds
 
   // Insert user into the database
   const sql = 'INSERT INTO users (username, email, password_hash, admin) VALUES (?, ?, ?, ?)';
-  db.query(sql, [username, email, hashedPassword, admin], (err, result) => {
+  db.query(sql, [User.UserName, User.Email, hashedPassword, User.admin], (err, result) => {
     if (err) {
       console.error('Error registering user:', err);
       res.status(500).json({ error: 'Internal server error' });
@@ -99,10 +101,11 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Protected route example
-app.get('/protected-route', authenticateToken, (req, res) => {
-  res.json({ message: 'This is a protected route', user: req.user });
+// Route to validate token and check login status
+app.post('/validate-token', authenticateToken, (req, res) => {
+  res.json({ message: 'Token is valid', user: req.user });
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
