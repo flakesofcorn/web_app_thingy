@@ -11,6 +11,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE USER 'wadb_user'@'localhost' IDENTIFIED BY 'asd321';
+CREATE USER 'wadb_user'@'%' IDENTIFIED BY 'asd321';
 GRANT ALL PRIVILEGES ON my_database.* TO 'wadb_user'@'localhost';
 FLUSH PRIVILEGES;

@@ -23,6 +23,6 @@ services:
       context: ./web
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
+      - "5191:5191"
     volumes:
       - ./web:/app  # Bind mount for backend code

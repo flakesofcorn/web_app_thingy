@@ -8,13 +8,14 @@ WORKDIR /app
 COPY . .
 
 # Restore dependencies
+
 RUN dotnet Restore
 
 # Build the application
 RUN dotnet build -c Release -o /app/build
 
 # Expose port to the outside world
-EXPOSE 5173
+EXPOSE 5191
 
 # Run the application
 CMD ["dotnet", "run"]
