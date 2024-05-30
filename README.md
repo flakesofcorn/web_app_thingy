@@ -27,45 +27,44 @@ This project consists of a React frontend application with Node.js and .NET back
 
 2. **Node Backend Setup:**
 
-bash
-Copy code
-cd server
-npm install
+    ```bash
+    cd server
+    npm install
+
 3. **.NET Backend Setup:**
 
-bash
-Copy code
-cd web
-dotnet restore
+    ```bash
+    cd web
+    dotnet restore
+
 4. **Run App Normally:**
 
-Start the React frontend:
+**Start the React frontend:**
+
+    
+    cd frontend
+    npm start
+
+**Start the Node.js backend:**
 
 
-cd frontend
-npm start
-Start the Node.js backend:
+    cd server
+    node server.js
+
+**Start the .NET backend:**
 
 
-cd server
-npm start
-Start the .NET backend:
-
-
-cd web
-dotnet run
+    cd web
+    dotnet run
 
 
 ## With Docker (Using Docker Compose)
 5. **Run App With Docker:**
 
-
-docker-compose build
-
-docker-compose up
-
-
-Additional Information
-Customize the configuration files (Dockerfile, docker-compose.yml, etc.) as needed.
-Remember to change Mysql information in server/server.js to your own database. (see db.sql in root folder)
+    ```bash
+    docker-compose build
+    docker-compose up
+## Additional Information
+Customize the configuration files (Dockerfile, docker-compose.yml, etc.) as needed. \
+Remember to change Mysql information in server/server.js to your own database (see db.sql in root folder).\
 For production deployment, update environment variables and configurations accordingly.
