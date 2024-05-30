@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 
 const LoginForm = ({ redirect, changelogged }) => {
   const [username, setUsername] = useState('');
@@ -23,26 +23,41 @@ const LoginForm = ({ redirect, changelogged }) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-      <Row>
-        <Col>
-        <button onClick={redirect}></button>
-        </Col>
-      </Row>
-    </form>
+    <div>
+      <Form onSubmit={handleSubmit}>
+        <Row className="px-5 py-5">
+          <Col sm={12}>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+            </Form.Group>
+          </Col>
+          <Col sm={4} className="d-none d-sm-block">
+            <p></p>
+          </Col>
+          <hr className="w-100" />
+          <Col sm={2} className="text-right">
+
+            <Button variant='success' type='submit'>Login</Button>
+          </Col>
+          <Col sm={2} className="text-left">
+
+            <Button variant='secondary' type='submit' onClick={redirect}>Register</Button>
+          </Col>
+        </Row>
+      </Form>
+    </div>
   );
 };
 
